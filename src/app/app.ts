@@ -17,7 +17,7 @@ class App extends EventEmitter {
 
     this.app = express();
 
-    this.app.use(cors());
+    this.app.use(cors());     //middleware
 
     this.initializeMiddlewares();
     this.initializeControllers(controllers);
@@ -51,8 +51,9 @@ class App extends EventEmitter {
 
     // use for computing processing time on response
     this.app.use((request: RequestWithUser, response: express.Response, next: express.NextFunction) => {
-      request.startTime = Date.now();
-      next();
+      request.startTime = Date.now();  //this middleware adds start time - used to know how much time it took to process the req and get the response
+      // console.log(request.startTime);
+      next();     //calling the next
     });
   } 
 
