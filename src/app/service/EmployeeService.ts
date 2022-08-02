@@ -31,7 +31,7 @@ export class EmployeeService{
                     experience: employeeDetails.experience,
                     username: employeeDetails.username,
                     password: employeeDetails.password? await bcrypt.hash(employeeDetails.password,10):'',
-
+                    role: employeeDetails.role,
                     // username: employeeDetails.username,
                     // age: employeeDetails.age,
                     departmentId: employeeDetails.departmentId,

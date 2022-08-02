@@ -1,8 +1,10 @@
 
 import { plainToClass } from "class-transformer";
 import { Department} from "../entities/Department";
+import EntityNotFoundException from "../exception/EntityNotFoundException";
 import HttpException from "../exception/HttpException";
 import { DepartmentRespository } from "../repository/departmentRepository";
+import { ErrorCodes } from "../util/errorCode";
 export class DepartmentService{
     
       constructor (private departmentRepo: DepartmentRespository){
@@ -27,7 +29,12 @@ export class DepartmentService{
             }
         }
         
-
+        async getDepartmentById(id:string){
+          const employee= await this.departmentRepo.getDepartmentById(id);
+          if(!employee){
+              throw new EntityNotFoundException(ErrorCodes.USER_WITH_ID_NOT_FOUND)
+          }
+      }
         public async updateDepartmentById(id: string, departmentDetails: any) {
             try {
               const updatedDepartment = plainToClass(Department, {

@@ -20,11 +20,23 @@ class DepartmentController extends AbstractController {
         this.createDepartment
       );
       this.router.put(`${this.path}/:id`, this.updateDepartmentById);
+      
       this.router.delete(`${this.path}`, this.softDelete);
+      this.router.get(`${this.path}/:id`, this.getDepartmentById);
     }
     private getDepartment = async (request: RequestWithUser, response: Response, next: NextFunction) => {
       try {
         const data: any = await this.departmentService.getAllDepartment();
+        response.status(200);
+        response.send(this.fmt.formatResponse(data, Date.now() - request.startTime, "OK", 1));
+      } catch (error) {
+        return next(error);
+      }
+    }
+    private getDepartmentById = async (request: RequestWithUser, response: Response, next: NextFunction) => {
+      try {
+        //console.log(request.params)
+        const data: any = await this.departmentService.getDepartmentById(request.params.id);
         response.status(200);
         response.send(this.fmt.formatResponse(data, Date.now() - request.startTime, "OK", 1));
       } catch (error) {

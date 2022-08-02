@@ -14,7 +14,10 @@ export class DepartmentRespository extends Repository<Department>{
         return departmentRepo.save(departmentDetails);
     }
 
-
+    async getDepartmentById(id:string){
+      const departmentRepo = getConnection().getRepository(Department);
+     return departmentRepo.findOne(id);
+ }
     public async updateDepartmentDetails(
         departmentId: string,
         departmentDetails: any
