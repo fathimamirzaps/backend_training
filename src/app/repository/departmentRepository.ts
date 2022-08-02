@@ -13,6 +13,22 @@ export class DepartmentRespository extends Repository<Department>{
         const departmentRepo = getConnection().getRepository(Department);
         return departmentRepo.save(departmentDetails);
     }
+
+
+    public async updateDepartmentDetails(
+        departmentId: string,
+        departmentDetails: any
+      ) {
+        const departmentRepo = getConnection().getRepository(Department);
+        const updateDepartmentDetails = await departmentRepo.update(
+          { id: departmentId, deletedAt: null },
+          {
+            name: departmentDetails.name ? departmentDetails.name : undefined,
+          }
+        );
+        return updateDepartmentDetails;
+      }
+      
     public async softDeleteDepartmentById(id: string) {
         const departmentRepo = getConnection().getRepository(Department);
         return departmentRepo.softDelete(

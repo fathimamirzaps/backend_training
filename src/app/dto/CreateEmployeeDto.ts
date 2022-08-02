@@ -12,4 +12,7 @@ export class CreateEmployeeDto {
 
     @IsString()
     public departmentId: string;
+
+    @IsString()
+    public password: string;
 }

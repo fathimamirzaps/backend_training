@@ -1,5 +1,5 @@
 import HttpException from "./HttpException";
-import { CustomError } from "../util/errorCode";
+import { CustomError, ErrorCodes } from "../util/errorCode";
 
 /**
  * This exception can use used in case an entity is not found.
@@ -7,6 +7,7 @@ import { CustomError } from "../util/errorCode";
 class EntityNotFoundException extends HttpException {
 
   constructor(error: CustomError) {
+    //const error = ErrorCodes.UNAUTHORIZED
     super(404, error.MESSAGE, error.CODE);
   }
 }
