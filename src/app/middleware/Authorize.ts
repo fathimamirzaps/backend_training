@@ -12,16 +12,13 @@ const authorize = (permittedRoles?: string[]) => {
     next: express.NextFunction
   ) => {
     try {
-        const token = getTokenFromRequestHeader(req);
-        jsonwebtoken.verify(token, process.env.JWT_TOKEN_SECRET);
-  
-        const data = jsonwebtoken.decode(token);
-  
-        const decodedData = JSON.parse(JSON.stringify(data));
-  
-        if (!(permittedRoles.includes(decodedData.role))) {
-          throw new UserNotAuthorizedException();
-        }
+      const token = getTokenFromRequestHeader(req);
+      jsonwebtoken.verify(token, process.env.JWT_TOKEN_SECRET);
+      const data = jsonwebtoken.decode(token);
+      const decodedData = JSON.parse(JSON.stringify(data));
+      if(!permittedRoles.includes(decodedData.role)) {
+        throw new UserNotAuthorizedException();
+      }
       return next();
     } catch (error) {
       return next(new UserNotAuthorizedException());

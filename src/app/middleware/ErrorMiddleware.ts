@@ -1,4 +1,3 @@
-
 import { NextFunction, Request, Response } from "express";
 import { Formatter } from "../util/formatter";
 import HttpException from "../exception/HttpException";

@@ -11,4 +11,12 @@ const APP_CONSTANTS = {
     service: "employee-app"
 };
 
+export const USER_ROLES = {
+    admin: "admin",
+    developer: "developer",
+    manager: "manager",
+    engineer: "engineer",
+    guest: "guest"
+}
+
 export default APP_CONSTANTS;

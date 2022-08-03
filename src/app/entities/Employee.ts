@@ -1,27 +1,47 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToMany, OneToOne } from "typeorm";
 import { AbstractEntity } from "./AbstractEntity";
+import { Address } from "./Address";
 import { Department } from "./Department";
 
-
 @Entity("employee")
-    export class Employee extends AbstractEntity{
+    export class Employee extends AbstractEntity {
         @PrimaryGeneratedColumn("uuid")
         public id: string;
+
         @Column({ nullable: false })
         public name: string;
-        @Column({nullable: false})
-        public experience: number;
-        @Column({nullable: false})
+
+        @Column({ nullable: false })
         public username: string;
-        @Column({nullable: false})
+
+        @Column({ nullable: false })
         public password: string;
-        @Column({nullable: true})
+
+        @Column({ nullable: false })
+        public dateofjoining: string;
+
+        @Column({ nullable: false })
+        public experience: number;
+
+        @Column({ nullable: false })
+        public status: string;
+
+        @Column({ nullable: false })
         public role: string;
 
-        
-        @ManyToOne(() => Department, { cascade: true })
-        @JoinColumn()
-        public department: Department;
-        @Column({ nullable: false })
-        public departmentId: string;
+        @ManyToOne(() => Department, {
+             cascade: true 
+        })
+            @JoinColumn()
+            public department: Department;
+            @Column({ nullable: false })
+            public departmentId: string;
+
+        @OneToOne(() => Address, {
+            cascade: true
+        })
+            @JoinColumn()
+            public address: Address;
+            @Column({ nullable: false })
+            public addressId: string;
 }
