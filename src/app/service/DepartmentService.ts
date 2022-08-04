@@ -2,6 +2,7 @@ import { plainToClass } from "class-transformer";
 import { Department } from "../entities/Department";
 import HttpException from "../exception/HttpException";
 import { DepartmentRepository } from "../repository/DepartmentRepository";
+import { errCode } from "../util/errorCode";
 
 export class DepartmentService{
     constructor(private departmentRepository: DepartmentRepository) {
@@ -19,7 +20,7 @@ export class DepartmentService{
             const data = await this.departmentRepository.getDepartmentById(departmentId);
             return data;
         } catch (err) {
-            throw new HttpException(400, "Failed to get department")
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to get department")
         }
     }
     
@@ -31,7 +32,7 @@ export class DepartmentService{
             const save = await this.departmentRepository.saveDepartmentDetails(newDepartment);
             return save;
         } catch (err) {
-            throw new HttpException(400, "Failed to create department");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to create department");
         }
     }
 
@@ -44,7 +45,7 @@ export class DepartmentService{
             const data = this.departmentRepository.updateDepartment(updatedDepartment);
             return data;
         } catch (err) {
-            throw new HttpException(400, "Failed to update department");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to update department");
         }
     }
 
@@ -54,7 +55,7 @@ export class DepartmentService{
             const data = this.departmentRepository.deleteDepartment(departmentId);
             return data;
         } catch (err) {
-            throw new HttpException(400, "Failed to delete department");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to delete department");
         }
     }
     

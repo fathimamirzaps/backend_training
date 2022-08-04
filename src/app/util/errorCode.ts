@@ -1,6 +1,6 @@
-/**
- * Custom error codes to be send to UI to display proper a response
- */
+export enum errCode{
+    BAD_REQUEST=400
+  }
  export const ErrorCodes: { [key: string]: CustomError } = {
     UNAUTHORIZED: {
         CODE: "UNAUTHORIZED",
@@ -28,9 +28,6 @@
     }
 };
 
-/**
- * Interface to describe custom errors
- */
 export interface CustomError {
     CODE: string;
     MESSAGE: string;

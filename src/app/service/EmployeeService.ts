@@ -3,7 +3,7 @@ import { Employee } from "../entities/Employee";
 import EntityNotFoundException from "../exception/EntityNotFoundException";
 import HttpException from "../exception/HttpException";
 import { EmployeeRepository } from "../repository/EmployeeRepository";
-import { ErrorCodes } from "../util/errorCode";
+import { errCode, ErrorCodes } from "../util/errorCode";
 import bcrypt from "bcrypt";
 import IncorrectUsernameOrPasswordException from "../exception/IncorrectUsernameOrPasswordException";
 import UserNotAuthorizedException from "../exception/UserNotAuthorizedException";
@@ -89,7 +89,7 @@ export class EmployeeService{
             const save = await this.employeeRepository.saveEmployeeDetails(newEmployee);
             return save;
         } catch (err) {
-            throw new HttpException(400, "Failed to create employee");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to create employee");
         }
     }
 
@@ -98,7 +98,7 @@ export class EmployeeService{
             const data = await this.employeeRepository.softDeleteEmployee(employeeId);
             return data;
         } catch (err) {
-            throw new HttpException(400, "Failed to delete employee");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to delete employee");
         }
     }
 
@@ -128,7 +128,7 @@ export class EmployeeService{
             const save = await this.employeeRepository.updateEmployee(updatedEmployee);
             return save;
         } catch (err) {
-            throw new HttpException(400, "Failed to update employee");
+            throw new HttpException(errCode.BAD_REQUEST, "Failed to update employee");
         }
     }
 } 
