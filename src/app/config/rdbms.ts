@@ -1,14 +1,12 @@
 import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
-/**
- * Uses env params to configure TypeORM database library
- */
+
 const config: PostgresConnectionOptions = {
     database: process.env.POSTGRES_DB,
     entities: [
       "dist/app/entities/*{.ts,.js}",
     ],
-    extra: { max: 5, min: 2 }, // connection pool
+    extra: { max: 5, min: 2 }, 
     host: process.env.POSTGRES_HOST,
     password: process.env.POSTGRES_PASSWORD,
     port: Number(process.env.POSTGRES_PORT),

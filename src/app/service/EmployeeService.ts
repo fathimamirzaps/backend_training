@@ -102,9 +102,8 @@ export class EmployeeService{
         }
     }
 
-    public async updateEmployee(employeeDetails: UpdateEmployeeDto, employeeId: string) {
+    public async updateEmployee(employeeDetails: UpdateEmployeeDto, employeeId: string):Promise<Employee> {
         try {
-            // const existingEmployee = this.employeeRepository.getEmployeeById(employeeId);
             const updatedEmpAddress = plainToClass(Address, {
                 id: employeeDetails.addressId,
                 line1: employeeDetails.address.line1,

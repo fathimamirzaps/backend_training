@@ -8,7 +8,7 @@ export class DepartmentRepository{
         return data;
     }
 
-    async getDepartmentById(departmentId: string) {
+    async getDepartmentById(departmentId: string): Promise<Department> {
         const departmentRepo = getConnection().getRepository(Department);
         const data = await departmentRepo.findOne({
             id: departmentId
@@ -16,12 +16,12 @@ export class DepartmentRepository{
         return data;
     }
 
-    public async saveDepartmentDetails(departmentDetails: Department) {
+    public async saveDepartmentDetails(departmentDetails: Department): Promise<Department> {
         const departmentRepo = getConnection().getRepository(Department);
         return departmentRepo.save(departmentDetails);
     }
 
-    public async updateDepartment(departmentDetails: Department) {
+    public async updateDepartment(departmentDetails: Department) : Promise<void> {
         const departmentRepo = getConnection().getRepository(Department);
         const data = await departmentRepo.update(
             {

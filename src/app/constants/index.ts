@@ -7,7 +7,6 @@ const APP_CONSTANTS = {
     bearer: "Bearer",
     basePath:`http://localhost:${process.env.PORT}`,
 
-    // Add the short name of the service below
     service: "employee-app"
 };
 

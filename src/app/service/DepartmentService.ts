@@ -8,12 +8,12 @@ export class DepartmentService{
 
     }
 
-    async getAllDepartments(){
+    async getAllDepartments(): Promise<Department[]>{
         const data = await this.departmentRepository.getAllDepartments();
         return data;
     }
 
-    public async getDepartmentById(departmentDetails: any) {
+    public async getDepartmentById(departmentDetails: any) : Promise<Department> {
         try{
             const departmentId = departmentDetails.id;
             const data = await this.departmentRepository.getDepartmentById(departmentId);
@@ -23,7 +23,7 @@ export class DepartmentService{
         }
     }
     
-    public async createDepartment(departmentDetails: any) {
+    public async createDepartment(departmentDetails: any) : Promise<Department> {
         try {
             const newDepartment = plainToClass(Department, {
                 name: departmentDetails.name,
@@ -35,7 +35,7 @@ export class DepartmentService{
         }
     }
 
-    public async updateDepartment(departmentIdDetails: any, departmentDetails: any) {
+    public async updateDepartment(departmentIdDetails: any, departmentDetails: any): Promise<void> {
         try {
             const updatedDepartment = plainToClass(Department, {
                 id: departmentIdDetails.id,

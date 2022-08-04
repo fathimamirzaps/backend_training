@@ -12,7 +12,7 @@ export class EmployeeRepository {
         return data;
     }
 
-    public async getEmployeeById(employeeId: string) {
+    public async getEmployeeById(employeeId: string): Promise<Employee> {
         const employeeRepo = getConnection().getRepository(Employee);
         const data = await employeeRepo.findOne({
             where: {
@@ -25,7 +25,7 @@ export class EmployeeRepository {
         return data;
     }
 
-    public async getEmployeeByName(username: string) {
+    public async getEmployeeByName(username: string): Promise<Employee> {
         const employeeRepo = getConnection().getRepository(Employee);
         const employeeDetail = await employeeRepo.findOne({
             where: { name: username },
@@ -33,13 +33,18 @@ export class EmployeeRepository {
         return employeeDetail;
     }
 
+    public async saveemployeeId(employeeId: Employee): Promise<Employee> {
+        const employeeRepo = getConnection().getRepository(Employee);
+        const data = employeeRepo.save(employeeId);
+        return data;
+    }
     public async saveEmployeeDetails(employeeDetails: Employee) {
         const employeeRepo = getConnection().getRepository(Employee);
         const data = employeeRepo.save(employeeDetails);
         return data;
     }
 
-    public async softDeleteEmployee(employeeId: string) {
+    public async softDeleteEmployee(employeeId: string): Promise<Employee> {
         const employeeRepo = getConnection().getRepository(Employee);
         const entity = await employeeRepo.findOne({
             where: {
@@ -53,16 +58,10 @@ export class EmployeeRepository {
         return data;
     }
 
-    public async updateEmployee(employeeDetails: Employee) {
+    public async updateEmployee(employeeId: Employee): Promise<Employee> {
         const employeeRepo = getConnection().getRepository(Employee);
-        // const data = await employeeRepo.update(
-        //     {
-        //         id: employeeDetails.id,
-        //         deletedAt: null
-        //     }, employeeDetails
-        // )
-        const data = await employeeRepo.save(employeeDetails)
-        const updatedData = await employeeRepo.findOne(employeeDetails.id)
+        const data = await employeeRepo.save(employeeId)
+        const updatedData = await employeeRepo.findOne(employeeId.id)
         return data;
     }
 }

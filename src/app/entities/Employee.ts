@@ -20,7 +20,7 @@ import { Department } from "./Department";
         @Column({ nullable: false })
         public dateofjoining: string;
 
-        @Column({ nullable: false })
+        @Column({ nullable: false, type:'float' })
         public experience: number;
 
         @Column({ nullable: false })
