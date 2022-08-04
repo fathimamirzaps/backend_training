@@ -4,7 +4,7 @@ import { Request } from "express";
 import * as express from "express";
 import HttpException from "../exception/HttpException";
 import APP_CONSTANTS from "../constants";
-import { ErrorCodes } from "../util/errorCode";
+import { errCode, ErrorCodes } from "../util/errorCode";
 
 function validationMiddleware<T>(type: any, parameter: string, skipMissingProperties = false): express.RequestHandler {
   return (req, res, next) => {
