@@ -22,30 +22,30 @@ class EmployeeController extends AbstractController {
     );
     this.router.get(
       `${this.path}`,
-      authorize([USER_ROLES.admin, USER_ROLES.manager, USER_ROLES.developer, USER_ROLES.engineer]),
+      //authorize([USER_ROLES.admin, USER_ROLES.manager, USER_ROLES.developer, USER_ROLES.engineer]),
       this.getEmployee
     );
     this.router.get(
       `${this.path}/:id`, 
-      authorize([USER_ROLES.admin, USER_ROLES.manager]),
+      //authorize([USER_ROLES.admin, USER_ROLES.manager]),
       validationMiddleware(UuidDto, APP_CONSTANTS.params),
       this.getEmployeeById
     )
     this.router.post(
       `${this.path}`,
-      authorize([USER_ROLES.admin]),
+      //authorize([USER_ROLES.admin]),
       validationMiddleware(CreateEmployeeDto, APP_CONSTANTS.body),
       this.createEmployee
     );
     this.router.delete(
       `${this.path}/:id`,
-      authorize([USER_ROLES.admin]),
+      //authorize([USER_ROLES.admin]),
       validationMiddleware(UuidDto, APP_CONSTANTS.params),
       this.deleteEmployee
     );
     this.router.put(
       `${this.path}/:id`,
-      authorize([USER_ROLES.admin]),
+      //authorize([USER_ROLES.admin]),
       validationMiddleware(UuidDto, APP_CONSTANTS.params),
       validationMiddleware(UpdateEmployeeDto, APP_CONSTANTS.body),
       this.updateEmployee
@@ -73,7 +73,7 @@ class EmployeeController extends AbstractController {
 
   private getEmployee = async (request: RequestWithUser, response: Response, next: NextFunction) => {
     try {
-      const data: any = await this.employeeService.getAllEmployees();
+      const data= await this.employeeService.getAllEmployees();
       response.status(200);
       response.send(this.fmt.formatResponse(data, Date.now() - request.startTime, "OK", 1));
     } catch (error) {
@@ -87,7 +87,7 @@ class EmployeeController extends AbstractController {
     next: NextFunction
   ) => {
     try {
-      const data: any = await this.employeeService.getEmployeeById(request.params.id);
+      const data= await this.employeeService.getEmployeeById(request.params.id);
       response.status(200);
       response.send(
         this.fmt.formatResponse(data, Date.now() - request.startTime, "OK")

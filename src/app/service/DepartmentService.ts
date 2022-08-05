@@ -1,4 +1,5 @@
 import { plainToClass } from "class-transformer";
+import { ParamsDictionary } from "express-serve-static-core";
 import { Department } from "../entities/Department";
 import HttpException from "../exception/HttpException";
 import { DepartmentRepository } from "../repository/DepartmentRepository";
@@ -14,7 +15,7 @@ export class DepartmentService{
         return data;
     }
 
-    public async getDepartmentById(departmentDetails: any) : Promise<Department> {
+    public async getDepartmentById(departmentDetails: ParamsDictionary) : Promise<Department> {
         try{
             const departmentId = departmentDetails.id;
             const data = await this.departmentRepository.getDepartmentById(departmentId);
@@ -24,7 +25,7 @@ export class DepartmentService{
         }
     }
     
-    public async createDepartment(departmentDetails: any) : Promise<Department> {
+    public async createDepartment(departmentDetails: { name: string; }) : Promise<Department> {
         try {
             const newDepartment = plainToClass(Department, {
                 name: departmentDetails.name,
@@ -36,7 +37,7 @@ export class DepartmentService{
         }
     }
 
-    public async updateDepartment(departmentIdDetails: any, departmentDetails: any): Promise<void> {
+    public async updateDepartment(departmentIdDetails: ParamsDictionary, departmentDetails: { name: string; }): Promise<void> {
         try {
             const updatedDepartment = plainToClass(Department, {
                 id: departmentIdDetails.id,
@@ -49,7 +50,7 @@ export class DepartmentService{
         }
     }
 
-    public async deleteDepartment(departmentIdDetails: any) {
+    public async deleteDepartment(departmentIdDetails: ParamsDictionary) {
         try {
             const departmentId = departmentIdDetails.id;
             const data = this.departmentRepository.deleteDepartment(departmentId);

@@ -13,7 +13,7 @@ class HealthController extends AbstractController {
   }
   private healthResponse = async (request: RequestWithUser, response: Response, next: NextFunction) => {
     try {
-      const data: any = { message: "Service Up"};
+      const data= { message: "Service Up"};
       response.status(200);
       response.send(this.fmt.formatResponse(data, Date.now() - request.startTime, "OK", 1));
     } catch (error) {

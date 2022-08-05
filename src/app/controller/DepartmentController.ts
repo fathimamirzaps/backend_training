@@ -51,7 +51,7 @@ class DepartmentController extends AbstractController {
 
   private getDepartments = async (request: RequestWithUser, response: Response, next: NextFunction) => {
     try {
-      const data: any = await this.departmentService.getAllDepartments();
+      const data = await this.departmentService.getAllDepartments();
       response.status(200);
       response.send(this.fmt.formatResponse(data, Date.now() - request.startTime, "OK", 1));
     } catch (error) {
